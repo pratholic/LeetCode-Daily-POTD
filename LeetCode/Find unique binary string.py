@@ -3,11 +3,21 @@ from typing import List
 
 class Solution:
     def findDifferentBinaryString(self, nums: List[str]) -> str:
-        n = len(nums)
-        res = ""
+        m = len(nums[0])
+        st = set(nums)
 
-        for i in range(n):
-            ch = "0" if nums[i][i] == "1" else "1"
-            res += ch
+        for mask in range(1 << m):
+            cur = ""
 
-        return res
+            for i in range(m):
+                if (mask >> i) & 1:
+                    cur += '1'
+
+                else:
+                    cur += '0'
+
+            if cur not in st:
+                return cur
+
+            
+        return
