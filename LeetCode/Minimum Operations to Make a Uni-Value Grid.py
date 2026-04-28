@@ -3,23 +3,28 @@ from typing import List
 
 class Solution:
     def minOperations(self, grid: List[List[int]], x: int) -> int:
-        
-        for row in grid:
-            for e in row:
-                if e % x != grid[0][0] % x:
+        m = len(grid)
+        n = len(grid[0])
+
+        base = grid[0][0] % x
+        for i in range(m):
+            for j in range(n):
+                if grid[i][j] % x != base:
                     return -1
 
-        nums = sorted([ele for row in grid for ele in row])
 
-        prefix = 0
+        nums = sorted([val for row in grid for val in row])
+
         total = sum(nums)
-        ans = float("inf")
+        pref = 0
+        ans = float('inf')
 
         for i in range(len(nums)):
-            cost_left = nums[i] * i - prefix
-            cost_right = total - prefix - (nums[i] * (len(nums) - i))
-            ops = (cost_left + cost_right) // x
-            ans = min(ans, ops)
-            prefix += nums[i]
+            left = nums[i] * i - pref
+            right = (total - pref) - (nums[i] * (len(nums) - i))
+            cost = (left + right) // x
+
+            ans = min(ans, cost)
+            pref += nums[i]
 
         return ans
