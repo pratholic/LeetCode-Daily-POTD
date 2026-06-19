@@ -9,4 +9,4 @@ class Solution:
         for i in range(n):
             ans.append(gain[i] + ans[-1])
 
-        return max(ans)
+        return max(ans) 
