@@ -1,0 +1,22 @@
+class Solution:
+    def smallestSubsequence(self, s: str) -> str:
+        n = len(s)
+        last = {}
+
+        for i, ch in enumerate(s):
+            last[ch] = i
+
+        stack = []
+        in_stack = set()
+
+        for i, ch in enumerate(s):
+            if ch in in_stack:
+                continue
+
+            while stack and stack[-1] > ch and last[stack[-1]] > i:
+                in_stack.remove(stack.pop())
+
+            in_stack.add(ch)
+            stack.append(ch)
+
+        return "".join(stack)
