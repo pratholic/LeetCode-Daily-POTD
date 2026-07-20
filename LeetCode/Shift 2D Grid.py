@@ -8,7 +8,7 @@ class Solution:
 
         temp = grid
 
-        for time in range(k):
+        for _ in range(k):
             temp = [[0] * n for _ in range(m)]
 
             for i in range(m):
